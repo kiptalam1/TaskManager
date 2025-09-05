@@ -8,6 +8,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
 
 		// Environment Settings
 		// See also https://aka.ms/tsconfig/module
@@ -38,11 +40,14 @@
 
 		// Recommended Options
 		"strict": true,
-		"jsx": "react-jsx",
+		// "jsx": "react-jsx",
 		"verbatimModuleSyntax": true,
 		"isolatedModules": true,
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
 		"skipLibCheck": true
-	}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist"],
+	"references": [{ "path": "../shared" }]
 }

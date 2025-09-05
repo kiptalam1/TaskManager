@@ -2,10 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import taskRoutes from "../src/routes/task.routes.ts";
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/tasks", taskRoutes);
 
 const port = process.env.PORT || 5000;
 
