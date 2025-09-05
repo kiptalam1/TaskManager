@@ -2,7 +2,9 @@ import { z } from "zod";
 
 export const TaskSchema = z.object({
 	id: z.number().int().positive(),
-	title: z.string().min(1, { message: "Task is required" }),
+	title: z
+		.string({ error: "Task is required" })
+		.min(1, { error: "Task is required" }),
 	isComplete: z.boolean().default(false),
 	createdAt: z.date().default(() => new Date()),
 });
