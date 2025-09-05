@@ -6,15 +6,17 @@
 		"outDir": "./dist",
 
 		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
 
 		// Environment Settings
 		// See also https://aka.ms/tsconfig/module
-		"module": "es6",
+		"module": "NodeNext",
+		"moduleResolution": "nodenext",
 		"target": "esnext",
-		"types": [],
 		// For nodejs:
-		// "lib": ["esnext"],
-		// "types": ["node"],
+		"lib": ["esnext"],
+		"types": ["node"],
 		// and npm install -D @types/node
 
 		// Other Outputs
