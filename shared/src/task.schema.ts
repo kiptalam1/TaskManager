@@ -10,8 +10,8 @@ export const TaskSchema = z.object({
 });
 
 export const CreateTaskSchema = TaskSchema.omit({ id: true, createdAt: true });
-export const UpdateTaskSchema = TaskSchema.partial().omit({
-	id: true,
-	createdAt: true,
+// For updating only the task status
+export const UpdateTaskSchema = z.object({
+  isComplete: z.boolean(),
 });
 export type Task = z.infer<typeof TaskSchema>;
