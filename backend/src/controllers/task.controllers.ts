@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, type Task } from "@prisma/client";
 import type { Request, Response } from "express";
 import {
 	CreateTaskSchema,
@@ -7,6 +7,8 @@ import {
 import { ZodError } from "zod";
 
 const prisma = new PrismaClient();
+
+// create a task;
 export const createTask = async (
 	req: Request,
 	res: Response
@@ -20,10 +22,29 @@ export const createTask = async (
 		});
 	} catch (error) {
 		if (error instanceof ZodError) {
-			res.status(400).json({ error: error.message });
+			res.status(400).json({ error: error.issues.map((e) => e.message)[0] });
 		} else {
 			console.error("Error creating task:", error);
 			res.status(500).json({ error: "Internal server error" });
 		}
+	}
+};
+
+// fetch all the tasks;
+export const getAllTasks = async (
+	_req: Request,
+	res: Response
+): Promise<void> => {
+	try {
+		const tasks: Task[] = await prisma.task.findMany();
+
+		res.status(200).json({
+			tasks: tasks.length ? tasks : [],
+		});
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(error.message);
+		}
+		res.status(500).json({ error: "Internal server error" });
 	}
 };
