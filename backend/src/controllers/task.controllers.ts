@@ -48,3 +48,41 @@ export const getAllTasks = async (
 		res.status(500).json({ error: "Internal server error" });
 	}
 };
+
+// delete a task;
+export const deleteTask = async (req: Request, res: Response): Promise<void> => {
+	const taskId = Number(req.params.id);
+	if (isNaN(taskId) || taskId <= 0 ) {
+		res.status(400).json({error: "Invalid Id"})
+	}
+	try {
+		const task = await prisma.task.findUnique({
+			where: { id: taskId }
+		});
+		
+		if (!task) {
+			res.status(404).json({
+				error: "Task no longer exist"
+			});
+		}
+
+		const taskDeleted = await prisma.task.delete({
+			where: {
+				id: taskId
+			}
+		});
+
+		res.status(200).json({
+			message: "Task deleted successfully",
+			task: taskDeleted
+		})
+
+	} catch (error) {
+		if (error instanceof (Error)) {
+			console.error(error.message);
+		}
+		res.status(500).json({
+			error: "Internal server error"
+		})
+	}
+}
