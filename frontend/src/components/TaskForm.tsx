@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Plus } from "react-bootstrap-icons";
 
 interface TaskFormProps {
-	onSubmit: (data: { task: string }) => void;
+	onSubmit: (data: { title: string }) => void;
 }
 
 const TaskForm = ({ onSubmit }: TaskFormProps) => {
 	interface FormData {
-		task: string;
+		title: string;
 	}
 	const [formData, setFormData] = useState<FormData>({
-		task: "",
+		title: "",
 	});
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,9 +19,11 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
 
 	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (!formData.task.trim()) return;
+		if (!formData.title.trim()) {
+			return;
+		}
 		onSubmit(formData);
-		setFormData({ task: "" }); // reset input after submit
+		setFormData({ title: "" }); // reset input after submit
 	};
 
 	return (
@@ -31,10 +33,10 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
 			className="flex items-center gap-3 bg-white rounded-xl shadow-sm border border-gray-200 p-4 w-full h-[80px]">
 			<input
 				type="text"
-				name="task"
-				value={formData.task}
+				name="title"
+				value={formData.title}
 				onChange={handleInputChange}
-				className="flex-1 py-3 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+				className="w-full py-3 px-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue1500 text-base"
 				placeholder="Enter task..."
 			/>
 			<button

@@ -10,7 +10,7 @@ export interface Task {
 }
 
 const useFetch = () => {
-	const { data, isFetching } = useQuery<{ tasks: Task[] }>({
+	const { data, isFetching, refetch } = useQuery<{ tasks: Task[] }>({
 		queryKey: ["tasksData"],
 		queryFn: async () => {
 			const response = await axios.get("http://localhost:5000/api/tasks");
@@ -21,6 +21,7 @@ const useFetch = () => {
 	return {
 		data,
 		isFetching,
+		refetch,
 	};
 };
 

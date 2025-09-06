@@ -2,13 +2,16 @@
 import TaskForm from "../components/TaskForm";
 import useFetch from "../hooks/useFetch";
 import TaskCard from "../components/TaskCard";
+import useCreate from "../hooks/useCreate";
 
 const Tasks = () => {
 	const { data, isFetching } = useFetch();
+	const { mutate: createTask, isPending } = useCreate();
+
 	const tasks = data?.tasks;
 
-	const handleSubmit = (data: { task: string }) => {
-		console.log("New task:", data);
+	const handleSubmit = (data: { title: string }) => {
+		createTask(data);
 	};
 
 	return (
@@ -23,6 +26,8 @@ const Tasks = () => {
 						Loading...
 					</div>
 				)}
+
+				{isPending && <p>Adding task...</p>}
 
 				{tasks?.map((task) => (
 					<TaskCard task={task} key={task.id} />
