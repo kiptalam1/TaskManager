@@ -30,7 +30,7 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
 		<form
 			onSubmit={handleFormSubmit}
 			id="task-form"
-			className="flex items-center gap-3 bg-white rounded-xl shadow-sm border border-gray-200 p-4 w-full h-[80px]">
+			className="flex items-center gap-3 bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-4 w-full h-[80px]">
 			<input
 				type="text"
 				name="title"

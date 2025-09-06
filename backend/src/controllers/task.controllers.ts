@@ -36,7 +36,11 @@ export const getAllTasks = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		const tasks: Task[] = await prisma.task.findMany();
+		const tasks: Task[] = await prisma.task.findMany({
+			orderBy: {
+				createdAt: "desc",
+			},
+		});
 
 		res.status(200).json({
 			tasks: tasks.length ? tasks : [],
