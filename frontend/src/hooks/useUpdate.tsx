@@ -13,7 +13,9 @@ const useUpdate = () => {
 
 	return useMutation({
 		mutationFn: async ({ id, isComplete }: updateTaskData) => {
-			const response = await axios.patch(`${API}/tasks/${id}`, { isComplete });
+			const response = await axios.patch(`${API}/api/tasks/${id}`, {
+				isComplete,
+			});
 			return response.data;
 		},
 		onSuccess: () => {

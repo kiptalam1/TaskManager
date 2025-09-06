@@ -8,7 +8,7 @@ const useCreate = () => {
 
 	return useMutation({
 		mutationFn: async (data: { title: string }) => {
-			const response = await axios.post(`${API}/tasks/create`, data);
+			const response = await axios.post(`${API}/api/tasks/create`, data);
 			return response.data;
 		},
 		onSuccess: () => {

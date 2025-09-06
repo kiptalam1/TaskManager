@@ -7,7 +7,7 @@ const useDelete = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (id: number) => {
-			const response = await axios.delete(`${API}/tasks/${id}`);
+			const response = await axios.delete(`${API}/api/tasks/${id}`);
 			return response.data;
 		},
 		onSuccess: () => {

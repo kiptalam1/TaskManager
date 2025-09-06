@@ -15,7 +15,7 @@ const useFetch = () => {
 	const { data, isFetching, refetch } = useQuery<{ tasks: Task[] }>({
 		queryKey: ["tasksData"],
 		queryFn: async () => {
-			const response = await axios.get(`${API}/tasks`);
+			const response = await axios.get(`${API}/api/tasks`);
 			return response.data;
 		},
 	});
