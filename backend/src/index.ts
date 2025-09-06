@@ -6,7 +6,12 @@ import taskRoutes from "./routes/task.routes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: ["https://taskmanager-qcwa.onrender.com"],
+		credentials: true,
+	})
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
