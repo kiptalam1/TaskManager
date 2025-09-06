@@ -8,8 +8,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"allowImportingTsExtensions": true,
-		"noEmit": true,
+		// "allowImportingTsExtensions": true,
+		"noEmit": false,
 
 		// Environment Settings
 		// See also https://aka.ms/tsconfig/module
