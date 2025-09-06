@@ -1,15 +1,16 @@
-import { Check } from "react-bootstrap-icons";
+import { Check, Trash } from "react-bootstrap-icons";
 import type { Task } from "../hooks/useFetch";
 
 interface TaskCardProps {
 	task: Task;
 	onSubmit: (id: number, task: Task) => void;
+	onDelete: (id: number) => void;
 }
 
-const TaskCard = ({ task, onSubmit }: TaskCardProps) => {
+const TaskCard = ({ task, onSubmit, onDelete }: TaskCardProps) => {
 	return (
 		<div className="flex flex-col justify-around gap-2 px-4 py-3 bg-white rounded-xl shadow  w-full min-h-[80px]">
-			<div className="flex items-center gap-3">
+			<div className="flex items-center gap-3 px-2 ">
 				<label className="relative flex items-center justify-center">
 					<input
 						type="checkbox"
@@ -25,11 +26,18 @@ const TaskCard = ({ task, onSubmit }: TaskCardProps) => {
 				</label>
 
 				<p
-					className={`text-base font-medium ${
+					className={`flex-1 text-base font-medium ${
 						task.isComplete ? "line-through text-gray-400" : "text-gray-800"
 					}`}>
 					{task.title}
 				</p>
+				<span className="mr-4 rounded-full p-2 transition-all hover:bg-red-100 hover:scale-110 active:scale-95">
+					<Trash
+						size={20}
+						onClick={() => onDelete(task.id)}
+						className="text-red-400 hover:text-red-600 cursor-pointer transition-colors"
+					/>
+				</span>
 			</div>
 
 			<div className="flex items-center gap-4 text-sm text-gray-500">

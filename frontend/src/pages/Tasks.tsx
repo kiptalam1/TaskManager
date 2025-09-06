@@ -5,11 +5,13 @@ import TaskCard from "../components/TaskCard";
 import useCreate from "../hooks/useCreate";
 import useUpdate from "../hooks/useUpdate";
 import type { Task } from "../hooks/useFetch";
+import useDelete from "../hooks/useDelete";
 
 const Tasks = () => {
 	const { data, isFetching } = useFetch();
 	const { mutate: createTask } = useCreate();
 	const { mutate: updateTask } = useUpdate();
+	const { mutate: deleteTask } = useDelete();
 
 	const tasks = data?.tasks;
 
@@ -20,6 +22,11 @@ const Tasks = () => {
 	const handleTaskUpdate = (id: number, task: Task) => {
 		updateTask({ id, isComplete: !task.isComplete });
 	};
+
+	const handleTaskDelete = (id: number) => {
+		deleteTask(id);
+	};
+
 	return (
 		<div className="min-h-screen w-full flex flex-col items-center px-4 py-6 bg-gray-50">
 			<h1 className="text-2xl font-bold text-gray-800 mb-6">Task Manager</h1>
@@ -34,7 +41,12 @@ const Tasks = () => {
 				)}
 
 				{tasks?.map((task) => (
-					<TaskCard task={task} onSubmit={handleTaskUpdate} key={task.id} />
+					<TaskCard
+						task={task}
+						onSubmit={handleTaskUpdate}
+						onDelete={handleTaskDelete}
+						key={task.id}
+					/>
 				))}
 
 				{!isFetching && (!tasks || tasks.length === 0) && (
