@@ -2,6 +2,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL;
+
 export interface Task {
 	id: number;
 	title: string;
@@ -13,7 +15,7 @@ const useFetch = () => {
 	const { data, isFetching, refetch } = useQuery<{ tasks: Task[] }>({
 		queryKey: ["tasksData"],
 		queryFn: async () => {
-			const response = await axios.get("http://localhost:5000/api/tasks");
+			const response = await axios.get(`${API}/tasks`);
 			return response.data;
 		},
 	});
