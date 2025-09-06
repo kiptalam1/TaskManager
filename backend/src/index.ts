@@ -8,7 +8,8 @@ const app = express();
 
 app.use(
 	cors({
-		origin: ["https://taskmanagerr-8gob.onrender.com", "http://localhost:5173"],
+		// origin: ["https://taskmanagerr-8gob.onrender.com", "http://localhost:5173"],
+		origin: true,
 		credentials: true,
 	})
 );
