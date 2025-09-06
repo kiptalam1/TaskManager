@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import {
 	CreateTaskSchema,
 	UpdateTaskSchema,
-} from "../../../shared/src/task.schema.ts";
+} from "../../../shared/src/task.schema.js";
 import { ZodError } from "zod";
 
 const prisma = new PrismaClient();
